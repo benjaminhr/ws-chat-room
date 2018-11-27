@@ -13,7 +13,7 @@ class MessageForm extends React.Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket('ws://localhost:8080') 
+    const socket = new WebSocket('ws://35.228.115.67') 
     this.setState({ socket })
   }
 
@@ -21,11 +21,14 @@ class MessageForm extends React.Component {
     e.preventDefault()
     
     if (this.state.socket.readyState === 1) {
+      const username = localStorage.get('username')
+      
       const msg = JSON.stringify({
         type: "new",
         message: {
           text: this.state.value, 
           timestamp: Number(new Date()),
+          sender: username
         }
       })
 

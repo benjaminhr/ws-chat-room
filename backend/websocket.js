@@ -35,11 +35,12 @@ module.exports = class Connection {
 
     if (msg.type === "new") {
       console.log(msg)
-      const { timestamp, text } = msg.message
+      const { timestamp, text, sender } = msg.message
       const newMsg = {
         timestamp,
         text,
-        sender: this.ws._socket.remoteAddress
+        sender,
+        ip: this.ws._socket.remoteAddress.replace('::ffff:', '')
       }
       
       database.create(newMsg, (err, instance) => {

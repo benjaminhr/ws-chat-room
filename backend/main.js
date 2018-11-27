@@ -1,4 +1,5 @@
 const WebSocket = require('./websocket.js')
 
-const connection = new WebSocket(8080)
+const port = process.env.PORT || 8080
+const connection = new WebSocket(port)
 connection.start()

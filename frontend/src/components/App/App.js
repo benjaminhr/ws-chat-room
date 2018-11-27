@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MessageForm from '../MessageForm/MessageForm.js'
 import Messages from '../Messages/Messages.js'
+import Username from '../Username/Username.js'
 import '../../styles/app.css'
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket("ws://localhost:8080")
+    const socket = new WebSocket("ws://35.228.115.67")
 
     socket.addEventListener('open', () => {
       socket.send(JSON.stringify({ type: "all" }))
@@ -37,10 +38,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Messages messages={this.state.messages} />
-        <MessageForm />
-      </div>
+      <React.Fragment>
+        <Username />
+        <div className="message-app">
+          <Messages messages={this.state.messages} />
+          <MessageForm />
+        </div>
+      </React.Fragment>
     )
   }
 }
