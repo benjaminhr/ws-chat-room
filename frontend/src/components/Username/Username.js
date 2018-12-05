@@ -11,14 +11,31 @@ class Username extends React.Component {
     this.submitUsername = this.submitUsername.bind(this)
   }
 
-  submitUsername() {
-    localStorage.setItem('username', this.state.username)
-    this.setState({ username: '' })
+  submitUsername(e) {
+    e.preventDefault()
+    const { username } = this.state
+
+    if (username.length <= 2) {
+      const event = new CustomEvent('error', {
+        detail: {
+          type:'new', 
+          message: 'Username must be at least 3 characters.'
+        }
+      })      
+
+      window.dispatchEvent(event)
+    } else {
+      localStorage.setItem('username', username)
+      this.setState({ username: '' })
+    }
   }
 
   render() {
     return (
-      <div className="username">
+      <form 
+        className="username"
+        onSubmit={this.submitUsername}
+      >
         <input 
           type="text"
           onChange={e => this.setState({ username: e.target.value })}
@@ -27,10 +44,10 @@ class Username extends React.Component {
           autoComplete="false"
           value={this.state.username}
         />
-        <button onClick={this.submitUsername}>
+        <button>
           Submit
         </button>
-      </div>
+      </form>
     )
   }
 }

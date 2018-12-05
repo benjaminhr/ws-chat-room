@@ -9,7 +9,7 @@ class MessageForm extends React.Component {
       socket: null
     }
 
-    this.sendMessage = this.sendMessage.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -17,11 +17,29 @@ class MessageForm extends React.Component {
     this.setState({ socket })
   }
 
-  sendMessage(e) {
+
+  onSubmit(e) {
     e.preventDefault()
-    
+
+    if (!localStorage.getItem('username')) {
+      const event = new CustomEvent('error', {
+        detail: {
+          type:'new', 
+          message: 'You must create a username before you can send messages.'
+        }
+      })
+
+      window.dispatchEvent(event)
+    }
+
+    if (this.state.value.length >= 1) {
+      this.sendMessage()
+    } 
+  }
+
+  sendMessage() {
     if (this.state.socket.readyState === 1) {
-      const username = localStorage.get('username')
+      const username = localStorage.getItem('username')
       
       const msg = JSON.stringify({
         type: "new",
@@ -36,6 +54,7 @@ class MessageForm extends React.Component {
       this.setState({ value: '' })
     } else {
       console.log('Unable to connect to websocket')
+      window.location.reload()
     }
   }
 
@@ -43,7 +62,7 @@ class MessageForm extends React.Component {
     return (
       <form 
         className="message-form" 
-        onSubmit={this.sendMessage}
+        onSubmit={this.onSubmit}
         autoComplete="off"
       >
         <input 
