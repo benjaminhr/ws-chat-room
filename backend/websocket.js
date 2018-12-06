@@ -1,5 +1,11 @@
+const https = require('https')
+const fs = require('fs')
 const WebSocket = require('ws')
 const database = require('./database.js')
+
+const privateKey = fs.readFileSync('ssl-cert/privkey.pem', 'utf8')
+const certificate = fs.readFileSync('ssl-cert/fullchain.pem', 'utf8')
+const credentials = { key: privateKey, cert: certificate }
 
 module.exports = class Connection {
   constructor(port) {
@@ -10,8 +16,14 @@ module.exports = class Connection {
 
   start() {
     console.log("Websocket server starting....")
+    
+    const httpsServer = https.createServer(credentials)
+    httpsServer.listen(8081)
 
-    this.wss = new WebSocket.Server({ port: this.port})
+    this.wss = new WebSocket.Server({ 
+	server: httpsServer,
+	port: this.port
+    })
     this.wss.on('connection', this._onConnection.bind(this))
   }
 
@@ -52,14 +64,12 @@ module.exports = class Connection {
           message: instance
         })
 
-	      this.wss.clients.forEach(client => {
+	this.wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
-	          console.log('broadcasted')
+	    console.log('broadcasted')
             client.send(newMsg)
-      	  } else { 
-            console.log("didnt send") 
-          }
-    	  })
+      	  } else { console.log("didnt send") }
+    	})
       })
 
     } else if (msg.type === "all") {
