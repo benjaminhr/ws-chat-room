@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket("ws://35.228.115.67")
+    const socket = new WebSocket("wss://35.228.115.67")
 
     socket.addEventListener('open', () => {
       socket.send(JSON.stringify({ type: "all" }))

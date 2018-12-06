@@ -13,7 +13,7 @@ class MessageForm extends React.Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket('ws://35.228.115.67') 
+    const socket = new WebSocket('wss://35.228.115.67') 
     this.setState({ socket })
   }
 
