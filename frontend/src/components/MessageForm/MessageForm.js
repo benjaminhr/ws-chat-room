@@ -13,7 +13,7 @@ class MessageForm extends React.Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket('wss://chatroom-ws.ml') 
+    const socket = new WebSocket('wss://chatroom-ws.ml:80') 
     this.setState({ socket })
   }
 
