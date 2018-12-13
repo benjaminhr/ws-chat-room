@@ -1,0 +1,7 @@
+appdirs==1.4.3
+attrs==18.2.0
+black==18.9b0
+Click==7.0
+pymongo==3.7.2
+toml==0.10.0
+-e git+https://github.com/dpallot/simple-websocket-server.git#egg=simple-websocket-server

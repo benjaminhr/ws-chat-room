@@ -1,4 +1,4 @@
-#!/Users/benjamin-r/dev/chat/backend/bin/python
+#!/Users/benjamin-r/dev/chat/backend-python/bin/python
 
 import sys
 import getopt

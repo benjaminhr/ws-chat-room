@@ -4,8 +4,9 @@ from bson.json_util import dumps, loads
 
 
 def get_all_messages():
-    client = pymongo.MongoClient(""
-                                 )
+    client = pymongo.MongoClient(
+        ""
+    )
     db = client["messages"]
     messages = db["messages"].find()
     message_array = list([message for message in messages])
@@ -23,8 +24,9 @@ def get_all_messages():
 
 
 def create_message(newMsg):
-    client = pymongo.MongoClient(""
-                                 )
+    client = pymongo.MongoClient(
+        ""
+    )
     db = client["messages"]
     messages = db["messages"]
 

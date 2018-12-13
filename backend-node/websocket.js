@@ -65,12 +65,12 @@ module.exports = class Connection {
           message: instance
         })
 
-	this.wss.clients.forEach(client => {
+	      this.wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
-	    console.log('broadcasted')
+	          console.log('broadcasted')
             client.send(newMsg)
       	  } else { console.log("didnt send") }
-    	})
+    	  })
       })
 
     } else if (msg.type === "all") {

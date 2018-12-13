@@ -6,7 +6,8 @@ node_modules
 certs
 example
 
-
+key.pem
+cert.pem
 # testing
 /coverage
 
