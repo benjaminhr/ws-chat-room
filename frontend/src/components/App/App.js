@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = new WebSocket("wss://chatroom-ws.ml:80")
+    const socket = new WebSocket("wss://localhost:8080")
 
     socket.addEventListener('open', () => {
       socket.send(JSON.stringify({ type: "all" }))
