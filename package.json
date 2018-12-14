@@ -1,8 +1,9 @@
 {
   "name": "chat",
   "scripts": {
-    "start": "concurrently \"cd backend && npm start\" \"cd frontend && PORT=8082 npm start\"",
-    "install": "concurrently \"cd backend && npm i\" \"cd frontend && npm i\""
+    "start:python": "concurrently \"cd backend-python && ./start.sh\" \"cd frontend && npm start\"",
+    "start:node": "concurrently \"cd backend-node && npm start\" \"cd frontend && npm start\"",
+    "install": "concurrently \"cd backend-node && npm i\" \"cd frontend && npm i\" \"cd backend-python && pip install -r requirements.txt\""
   },
   "devDependencies": {
     "concurrently": "^4.1.0"
