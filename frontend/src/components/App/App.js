@@ -20,7 +20,7 @@ class App extends Component {
     const socket = new WebSocket("wss://35.228.190.182:8000")
 
     socket.addEventListener('open', () => {
-      socket.send(JSON.stringify({ type: "all" }))
+      socket.send(JSON.stringify({ type: "get_all" }))
     })
 
     socket.addEventListener('error', (event) => {
