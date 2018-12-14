@@ -5,7 +5,7 @@ from bson.json_util import dumps, loads
 
 def get_all_messages():
     client = pymongo.MongoClient(
-        ""
+        "mongodb://root:qwerty101@ds115854.mlab.com:15854/messages"
     )
     db = client["messages"]
     messages = db["messages"].find()
@@ -25,7 +25,7 @@ def get_all_messages():
 
 def create_message(newMsg):
     client = pymongo.MongoClient(
-        ""
+        "mongodb://root:qwerty101@ds115854.mlab.com:15854/messages"
     )
     db = client["messages"]
     messages = db["messages"]
