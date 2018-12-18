@@ -66,20 +66,6 @@ class Chatroom(WebSocket):
     def handleClose(self):
         clients.remove(self)
         print(self.address, 'closed')
-        for client in clients:
-            msg = {
-                "type": "message",
-                "message": {
-                    "_id": 2222222222,
-                    "text": self.address[0] + u' - disconnected',
-                    "sender": "Server 👋",
-                    "timestamp": 1293231923
-                }
-            }
-
-            msgJSON = json.dumps(msg)
-            client.sendMessage(msgJSON)
-
 
 if __name__ == "__main__":
 
